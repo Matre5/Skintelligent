@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 OPENROUTER_API_KEY = os.getenv('API_KEY')
-OPENROUTER_BASE_URL = os.getenv('BASE_URL')
 DEFAULT_MODEL = os.getenv('DEFAULT_MODEL')
 INGREDIENT_MODEL = os.getenv('INGREDIENT_EXPLAINER_MODEL')
 
@@ -54,9 +53,8 @@ with tab1:
                     {"role": "user", "content": prompt}
                 ]
             }
-
             response = requests.post(
-                OPENROUTER_BASE_URL,
+                "https://openrouter.ai/api/v1/chat/completions",
                 headers=headers,
                 json=body
             )
@@ -185,7 +183,7 @@ with tab2:
                     ]
                 }
 
-                response = requests.post(OPENROUTER_BASE_URL, headers=headers, json=body)
+                response = requests.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=body)
 
                 try:
                     reply = response.json()['choices'][0]['message']['content']
@@ -239,7 +237,7 @@ with tab3:
             }
 
             response = requests.post(
-                OPENROUTER_BASE_URL,
+                "https://openrouter.ai/api/v1/chat/completions",
                 headers=headers,
                 json=body
             )
